@@ -1,0 +1,944 @@
+one.html
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Volunteer Overseas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://dl.dropbox.com/s/xus8ttz5d0614bw/owl.carousel.min.css">
+    <link rel="stylesheet" href="http://dl.dropbox.com/s/73m8ht889g5z0mb/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* Global */
+        :root {
+            --primary: #00acc1;
+            --secondary: #e94b5a;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f7f9fb;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #e7e7e77e;
+        }
+
+        .header {
+            justify-content: center;
+        }
+
+        .header .img,
+        .header .desc {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .header .img img {
+            height: 65px;
+        }
+
+        /* Slider */
+        .mySwiper2 {
+            width: 70%;
+            height: 100%;
+        }
+
+        .mySwiper2 .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mySwiper2 img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fff;
+        }
+
+        .swiper-button-prev {
+            left: 40px;
+        }
+
+        .swiper-button-next {
+            right: 40px;
+        }
+
+        .photo-thumbs {
+            padding: 10px 0;
+            /* background: rgba(0, 0, 0, 0.95); */
+        }
+
+        .mySwiper {
+            height: 110px;
+        }
+
+        .mySwiper .swiper-slide {
+            width: 33.33%;
+            height: 90px;
+            opacity: 0.4;
+            cursor: pointer;
+        }
+
+        .mySwiper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 2px;
+        }
+
+        .mySwiper .swiper-slide-thumb-active {
+            opacity: 1;
+            border: 2px solid #fff;
+        }
+
+        .photo-modal .modal-content {
+            background: rgba(0, 0, 0, 0.589);
+            border: none;
+        }
+
+        .photo-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            z-index: 20;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .photo-stage {
+            position: relative;
+            height: calc(100vh - 140px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .swiper-thumbs {
+            width: 548px;
+            position: absolute;
+            bottom: 231px;
+            left: 111px;
+        }
+
+        /* TABS */
+        .custom-tabs {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .custom-tabs .nav-item {
+            width: 100%;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .custom-tabs .nav-link {
+            border: none;
+            color: #6aa9a9;
+            font-weight: 600;
+            padding: 10px 16px;
+            text-transform: uppercase;
+            font-size: 13px;
+            text-align: left;
+            width: 100%;
+        }
+
+        .custom-tabs .nav-link.active {
+            background: var(--secondary);
+            color: #fff;
+        }
+
+
+        /* tab-content */
+
+        .desc-hero {
+            text-align: center;
+        }
+
+        .desc-hero h2 {
+            color: var(--primary);
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .desc-img {
+            max-width: 180px;
+            margin: 20px auto;
+        }
+
+        .desc-section {
+            padding: 20px 10px;
+        }
+
+        .desc-hero p {
+            font-size: 14px;
+        }
+
+        /* Organization */
+        .desc-section.light {
+            background: var(--bg-light);
+        }
+
+        .desc-section h3 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .desc-card {
+            border: 1px solid;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .desc-card span {
+            font-size: 30px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .desc-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .desc-section li.org {
+            text-align: center;
+        }
+
+        /* date */
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th {
+            background: #00acc1;
+            color: #fff;
+            padding: 15px;
+        }
+
+        td {
+            border: 1px solid #ccc;
+            padding: 15px;
+            font-size: 18px;
+            color: #00acc1;
+        }
+
+        td span {
+            color: #e43c5b;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .owl-theme .owl-dots {
+            display: none;
+        }
+
+        .owl-carousel .owl-nav button.owl-prev {
+            font-size: 56px;
+            position: absolute;
+            top: -25px;
+            left: 4px;
+            color: #fff;
+        }
+
+        .owl-carousel .owl-nav button.owl-next {
+            font-size: 56px;
+            position: absolute;
+            top: -25px;
+            right: 4px;
+            color: #fff;
+        }
+
+        .owl-theme .owl-nav [class*=owl-]:hover {
+            background: none !important;
+            color: #e43c5b;
+        }
+
+        .owl-carousel .owl-nav {
+            display: block !important;
+        }
+
+        /* Cost */
+
+        .cost-section h3,
+        .cost-section p {
+            text-align: center;
+        }
+
+        .cost-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cost-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .cost-card:hover .card-body {
+            background-color: #f8f9fa;
+            border-radius: 0.5rem;
+        }
+
+        /* ================= APPLY CARD ================= */
+        .apply-card {
+            background: #00a9b7;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .badge-box {
+            background: #f0f0f029;
+            padding: 6px;
+            text-align: center;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        .apply-card p a {
+            color: #fff;
+        }
+
+        .apply-card p {
+            font-size: 12px;
+        }
+
+        .apply-card label {
+            margin: 15px 0 10px 0;
+        }
+
+        .apply-card input,
+        .apply-card select {
+            border-radius: 0;
+        }
+
+        .apply-btn,
+        .btn {
+            border-radius: 3px;
+            background: #e63946;
+            color: #fff;
+            border: none;
+        }
+
+
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            display: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="date"] {
+            -moz-appearance: textfield;
+        }
+
+        input[type="date"]::-webkit-inner-spin-button,
+        input[type="date"]::-webkit-clear-button {
+            display: none;
+        }
+
+        .modal-content,
+        .signup-form .form-control,
+        .signup-form .form-select {
+            border-radius: 3px;
+            border-color: gray;
+        }
+
+        .signup-form label {
+            margin-bottom: 3px;
+            font-size: 15px;
+        }
+
+        .modal-title {
+            font-weight: 700;
+        }
+
+
+        @media (min-width: 576px) {
+            .desc-hero {
+                text-align: left;
+                /* padding: 0; */
+            }
+
+            .desc-hero h2 {
+                font-size: 24px;
+            }
+
+            .desc-img {
+                width: 100%;
+                margin-top: 0;
+            }
+
+            .desc-section h3 {
+                font-size: 22px;
+            }
+
+            .desc-list {
+                text-align: left;
+            }
+
+            .custom-tabs {
+                flex-direction: row;
+                justify-content: space-around;
+                width: 100%;
+            }
+
+            .custom-tabs .nav-item {
+                width: auto;
+                border-bottom: none;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .mySwiper2 {
+                width: 75%;
+            }
+
+            .mySwiper2 img {
+                height: 300px;
+                width: 548px;
+                object-fit: fill;
+            }
+
+            .mySwiper {
+                height: 110px;
+            }
+
+            .mySwiper .swiper-slide {
+                width: 130px;
+                height: 85px;
+            }
+
+            .desc-hero h2 {
+                font-size: 26px;
+            }
+
+            .desc-hero .lead {
+                font-size: 16px;
+            }
+
+            .desc-img {
+                max-width: 260px;
+            }
+
+            .desc-section {
+                padding: 20px 20px;
+            }
+
+            .desc-section h3 {
+                font-size: 24px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .mySwiper2 {
+                width: 65%;
+            }
+
+            .mySwiper {
+                height: 130px;
+            }
+
+            .mySwiper .swiper-slide {
+                width: 160px;
+                height: 100px;
+            }
+
+            .desc-hero {
+                padding: 70px 30px;
+            }
+
+            .desc-hero h2 {
+                font-size: 32px;
+            }
+
+            .desc-hero p {
+                font-size: 16px;
+            }
+
+            .desc-img {
+                max-width: 300px;
+            }
+
+            .desc-list li {
+                font-size: 17px;
+            }
+
+            .apply-card {
+                position: sticky;
+                top: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container my-4">
+        <div class="row d-flex align-items-start">
+
+            <div class="col-12 col-lg-8">
+                <!-- Ghana College -->
+                <div class="program-header mb-4 p-3 border rounded">
+                    <div class="d-flex align-items-center gap-3 flex-wrap header">
+                        <h3>Ghana Medical College</h3>
+                        <div class="img">
+                            <img src="./images/play-logo.png" alt="">
+                            <span>Plan My Gap Year</span>
+                        </div>
+                        <div class="desc">
+                            <img src="./images/icon1.png" alt="">
+                            <span>From $714 for 2 Weeks</span>
+                        </div>
+                        <button class="btn signup-btn w-100" data-bs-toggle="modal" data-bs-target="#photoModal">
+                            View Photos
+                        </button>
+                        <!-- PHOTO MODAL -->
+                        <!-- PHOTO GALLERY MODAL -->
+                        <div class="modal fade photo-modal" id="photoModal" tabindex="-1">
+                            <div class="modal-dialog modal-fullscreen">
+                                <div class="modal-content">
+
+                                    <!-- CLOSE -->
+                                    <button type="button" class="photo-close" data-bs-dismiss="modal">✕</button>
+
+                                    <!-- MAIN IMAGE -->
+                                    <div class="photo-stage">
+
+                                        <!-- LEFT ARROW -->
+                                        <div class="swiper-button-prev photo-arrow"></div>
+
+                                        <!-- RIGHT ARROW -->
+                                        <div class="swiper-button-next photo-arrow"></div>
+
+                                        <div class="swiper mySwiper2">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide">
+                                                    <img src="https://swiperjs.com/demos/images/nature-1.jpg">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="https://swiperjs.com/demos/images/nature-2.jpg">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img src="https://swiperjs.com/demos/images/nature-3.jpg">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- THUMBNAILS -->
+                                    <div class="photo-thumbs">
+                                        <div thumbsSlider="" class="swiper mySwiper">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide"><img
+                                                        src="https://swiperjs.com/demos/images/nature-1.jpg"></div>
+                                                <div class="swiper-slide"><img
+                                                        src="https://swiperjs.com/demos/images/nature-2.jpg"></div>
+                                                <div class="swiper-slide"><img
+                                                        src="https://swiperjs.com/demos/images/nature-3.jpg"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <ul class="nav custom-tabs mb-3">
+                    <li class="nav-item">
+                        <button class="nav-link active" data-bs-toggle="tab"
+                            data-bs-target="#description">Description</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#location">Location</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#cost">Cost</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#dates">Dates</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="tab"
+                            data-bs-target="#organization">Organization</button>
+                    </li>
+                </ul>
+
+                <!-- Tab's Content -->
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="description">
+                        <section class="desc-hero">
+                            <div class="row align-items-center flex-column-reverse flex-sm-row">
+
+                                <div class="col-sm-9">
+                                    <h2>Make a Difference Abroad</h2>
+                                    <p class="lead">
+                                        Volunteer Overseas connects passionate volunteers, interns,
+                                        and ESL teachers with trusted programs worldwide.
+                                    </p>
+                                    <p>
+                                        From education and healthcare to wildlife conservation and
+                                        community development, we help you find meaningful projects
+                                        that fit your goals, budget, and schedule.
+                                    </p>
+                                </div>
+
+                                <div class="col-sm-3 text-center">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/201/201623.png" alt="Volunteer"
+                                        class="img-fluid desc-img">
+                                </div>
+
+                            </div>
+                        </section>
+
+                        <!-- WHY CHOOSE US -->
+
+
+                    </div>
+                    <div class="tab-pane fade" id="location">
+                        <iframe
+                            src="https://www.google.com/maps/d/u/0/embed?mid=1xKun4POkd31vlOsgnkq4RSNySjyxWew&ehbc=2E312F"
+                            width="100%" height="450" style="border:0;" loading="lazy">
+                        </iframe>
+                    </div>
+                    <div class="tab-pane fade" id="cost">
+                        <section class="cost-section py-4">
+                            <div class="container">
+                                <h3 class="mb-3">Program Costs</h3>
+                                <p class="mb-4">
+                                    Our programs are designed to be affordable and transparent. Here's a breakdown of
+                                    what you can expect:
+                                </p>
+
+                                <div class="row g-3">
+                                    <!-- Program Fee -->
+                                    <div class="col-md-4">
+                                        <div class="card h-100 text-center shadow-sm cost-card">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Program Fee</h5>
+                                                <p class="card-text display-6">₹25,000</p>
+                                                <p class="small text-muted">Includes accommodation, meals, and local
+                                                    transport</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Application Fee -->
+                                    <div class="col-md-4">
+                                        <div class="card h-100 text-center shadow-sm cost-card">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Application Fee</h5>
+                                                <p class="card-text display-6">₹2,500</p>
+                                                <p class="small text-muted">One-time non-refundable fee</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Optional Activities -->
+                                    <div class="col-md-4">
+                                        <div class="card h-100 text-center shadow-sm cost-card">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Optional Activities</h5>
+                                                <p class="card-text display-6">₹5,000</p>
+                                                <p class="small text-muted">Excursions, workshops, and cultural trips
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Notes -->
+                                <div class="mt-4">
+                                    <p class="text-muted small">
+                                        * Costs may vary depending on the project duration and location. All payments
+                                        are secure and transparent.
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+
+                    </div>
+                    <div class="tab-pane fade" id="dates">
+                        <div class="owl-carousel owl-theme">
+                            <div class="item">
+                                <table class="">
+                                    <tr>
+                                        <th>February 2018</th>
+                                    </tr>
+                                    <tr>
+                                        <td><span>04</span>Sunday</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>18</span>Sunday</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="item">
+                                <table class="">
+                                    <tr>
+                                        <th>March 2018</th>
+                                    </tr>
+                                    <tr>
+                                        <td><span>07</span>Sunday</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>21</span>Sunday</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="">
+                                <table class="item">
+                                    <tr>
+                                        <th>April 2018</th>
+                                    </tr>
+                                    <tr>
+                                        <td><span>04</span>Sunday</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>18</span>Sunday</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="">
+                                <table class="item">
+                                    <tr>
+                                        <th>May 2018</th>
+                                    </tr>
+                                    <tr>
+                                        <td><span>04</span>Sunday</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span>18</span>Sunday</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="organization">
+                        <section class="desc-section">
+                            <h3>Why Choose Volunteer Overseas?</h3>
+
+                            <div class="row text-center">
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="desc-card">
+                                        <span>🌍</span>
+                                        <h6>Global Projects</h6>
+                                        <p>Opportunities across Africa, Asia, and Latin America</p>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="desc-card">
+                                        <span>🤝</span>
+                                        <h6>Trusted Partners</h6>
+                                        <p>Carefully screened local organizations</p>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="desc-card">
+                                        <span>💰</span>
+                                        <h6>Affordable Fees</h6>
+                                        <p>Transparent pricing with no hidden costs</p>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="desc-card">
+                                        <span>📞</span>
+                                        <h6>Personal Support</h6>
+                                        <p>Guidance before, during, and after your trip</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- WHO CAN APPLY -->
+                        <section class="desc-section light">
+                            <div class="row align-items-center flex-column flex-sm-row">
+
+                                <div class="col-sm-4 text-center">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/1995/1995574.png"
+                                        class="img-fluid desc-img" alt="Who can apply">
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <h3 class="text-sm-start">Who Can Apply?</h3>
+                                    <ul class="desc-list">
+                                        <li>✔ Students & gap-year travelers</li>
+                                        <li>✔ Working professionals</li>
+                                        <li>✔ First-time or experienced volunteers</li>
+                                        <li>✔ Individuals, couples & groups</li>
+                                        <br>
+                                        <li class="org"><a href="#" class="btn btn-danger px-4">Explore Programs</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </section>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Apply Form -->
+            <div class="col-12 col-lg-4 mt-4 mt-lg-0">
+                <div class="apply-card">
+                    <div class="badge-box">23 people are researching this project</div>
+
+                    <label>Project start date</label>
+                    <input type="date" class="form-control mb-2">
+
+                    <label>Duration</label>
+                    <select class="form-select mb-3">
+                        <option>2 weeks</option>
+                        <option>3 weeks</option>
+                    </select>
+
+                    <button class="btn apply-btn w-100" data-bs-toggle="modal" data-bs-target="#signupModal">
+                        Apply Now
+                    </button>
+
+                    <p class="mt-2">
+                        Applying through Volunteer Overseas gets you access to exclusive <a href="#"> travel
+                            scholarships</a> and a
+                        no-fee <a href="#">fundraising platform</a>
+                    </p>
+                </div>
+                <!-- Form -->
+                <div class="modal fade" id="signupModal" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered modal-responsive">
+                        <div class="modal-content signup-modal">
+                            <div class="modal-header border-0 justify-content-center"
+                                style="padding: 15px 5px 0px 5px;">
+                                <h6 class="modal-title signup-title">SIGN UP</h6>
+                                <!-- <button type="button" class="btn-close position-absolute end-0 me-3"
+                                    data-bs-dismiss="modal"></button> -->
+                            </div>
+                            <hr>
+                            <div class="modal-body signup-form">
+
+                                <div class="mb-3">
+                                    <label class="form-label">Full Name</label>
+                                    <input type="text" class="form-control signup-input">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Project start date</label>
+                                    <input type="date" class="form-control signup-input">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Duration</label>
+                                    <select class="form-select signup-input">
+                                        <option>2 weeks</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control signup-input">
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label">Phone</label>
+                                    <input type="text" class="form-control signup-input">
+                                </div>
+
+                                <button class="btn signup-btn w-100">Sign up</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+    <script src="http://dl.dropbox.com/s/7jaoqrmgyrk4scu/owl.carousel.min.js"></script>
+    <script>
+        let thumbsSwiper, mainSwiper;
+
+        document.getElementById('photoModal')
+            .addEventListener('shown.bs.modal', function () {
+
+                thumbsSwiper = new Swiper(".mySwiper", {
+                    spaceBetween: 10,
+                    slidesPerView: "auto",
+                    watchSlidesProgress: true,
+                });
+
+                mainSwiper = new Swiper(".mySwiper2", {
+                    navigation: {
+                        nextEl: ".swiper-button-next",
+                        prevEl: ".swiper-button-prev",
+                    },
+                    thumbs: {
+                        swiper: thumbsSwiper,
+                    },
+                });
+
+            });
+
+
+
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            nav: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                480: {
+                    items: 2
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 4
+                }
+            }
+        });
+        owl.on('mousewheel', '.owl-stage', function (e) {
+            if (e.deltaY > 0 || (e.originalEvent && e.originalEvent.wheelDelta > 0)) {
+                owl.trigger('next.owl');
+            } else {
+                owl.trigger('prev.owl');
+            }
+            e.preventDefault();
+        });
+    </script>
+</body>
+
+</html>
