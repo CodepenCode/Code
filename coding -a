@@ -1,0 +1,213 @@
+/* ================================
+   DATABASE
+================================ */
+CREATE DATABASE employee_portal;
+USE employee_portal;
+
+/* ================================
+   TABLES
+================================ */
+
+-- 1. City
+CREATE TABLE City (
+    city_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) UNIQUE NOT NULL
+);
+
+-- 2. Roles
+CREATE TABLE Roles (
+    role_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) UNIQUE NOT NULL
+);
+
+-- 3. Users
+CREATE TABLE Users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    role_id INT,
+    email_id VARCHAR(100),
+    password VARCHAR(100),
+    phone_number VARCHAR(15),
+    photo VARCHAR(255),
+    birth_date DATE,
+    address TEXT,
+    city_id INT,
+    joining_date DATE,
+    created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    active BOOLEAN,
+
+    FOREIGN KEY (role_id) REFERENCES Roles(role_id),
+    FOREIGN KEY (city_id) REFERENCES City(city_id)
+);
+
+-- 4. Groups
+CREATE TABLE Groups (
+    group_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    description TEXT,
+    active BOOLEAN,
+    created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    created_by INT,
+    FOREIGN KEY (created_by) REFERENCES Users(user_id)
+);
+
+-- 5. Sub Groups
+CREATE TABLE Sub_Groups (
+    sub_group_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    group_id INT,
+    description TEXT,
+    active BOOLEAN,
+    created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    created_by INT,
+    FOREIGN KEY (group_id) REFERENCES Groups(group_id),
+    FOREIGN KEY (created_by) REFERENCES Users(user_id)
+);
+
+-- 6. Group Posts
+CREATE TABLE Group_Posts (
+    post_id INT AUTO_INCREMENT PRIMARY KEY,
+    posted_by INT,
+    title VARCHAR(200),
+    content TEXT,
+    group_id INT,
+    sub_group_id INT,
+    image1 VARCHAR(255),
+    image2 VARCHAR(255),
+    reference_link VARCHAR(255),
+    like_count INT,
+    created_date DATETIME,
+    FOREIGN KEY (posted_by) REFERENCES Users(user_id),
+    FOREIGN KEY (group_id) REFERENCES Groups(group_id),
+    FOREIGN KEY (sub_group_id) REFERENCES Sub_Groups(sub_group_id)
+);
+
+/* ================================
+   INSERT DATA (10+ rows each)
+================================ */
+
+-- City (10)
+INSERT INTO City (name) VALUES
+('Mumbai'),('Pune'),('Delhi'),('Bangalore'),('Chennai'),
+('Hyderabad'),('Ahmedabad'),('Jaipur'),('Indore'),('Nagpur');
+
+-- Roles (10)
+INSERT INTO Roles (name) VALUES
+('Admin'),('HR'),('Developer'),('Tester'),('Manager'),
+('Designer'),('Lead'),('Intern'),('Support'),('Finance');
+
+-- Users (10)
+INSERT INTO Users VALUES
+(1,'Amit','Shah',1,'amit@company.com','123','9000000001',NULL,'1990-01-30','Mumbai',1,'2018-01-01',NOW(),1),
+(2,'Riya','Patel',2,'riya@company.com','123','9000000002',NULL,'1995-01-30','Pune',2,'2019-02-10',NOW(),1),
+(3,'Neha','Mehta',3,'neha@company.com','123','9000000003',NULL,'1998-03-15','Delhi',3,'2020-03-20',NOW(),1),
+(4,'Karan','Joshi',4,'karan@company.com','123','9000000004',NULL,'1997-04-12','Mumbai',1,'2021-04-01',NOW(),1),
+(5,'Rahul','Verma',5,'rahul@company.com','123','9000000005',NULL,'1992-05-10','Bangalore',4,'2017-06-01',NOW(),1),
+(6,'Sneha','Kulkarni',6,'sneha@company.com','123','9000000006',NULL,'1996-06-20','Pune',2,'2022-01-15',NOW(),1),
+(7,'Ankit','Singh',3,'ankit@company.com','123','9000000007',NULL,'1994-07-18','Delhi',3,'2019-09-01',NOW(),1),
+(8,'Pooja','Jain',8,'pooja@company.com','123','9000000008',NULL,'2000-08-25','Indore',9,'2023-02-01',NOW(),1),
+(9,'Vikas','Yadav',9,'vikas@company.com','123','9000000009',NULL,'1993-09-05','Jaipur',8,'2020-11-11',NOW(),1),
+(10,'Nikita','Rao',10,'nikita@company.com','123','9000000010',NULL,'1991-10-10','Chennai',5,'2016-05-20',NOW(),1);
+
+-- Groups (10)
+INSERT INTO Groups VALUES
+(1,'Entertainment','Movies & Series',1,NOW(),1),
+(2,'Technology','Latest Tech',1,NOW(),3),
+(3,'Books','Book Discussions',1,NOW(),2),
+(4,'Art & Craft','Creative Arts',1,NOW(),6),
+(5,'Fitness','Health Tips',1,NOW(),5),
+(6,'Travel','Travel Stories',1,NOW(),9),
+(7,'Finance','Money Talks',0,NOW(),10),
+(8,'Design','UI UX',1,NOW(),6),
+(9,'Testing','QA World',1,NOW(),4),
+(10,'HR Talks','HR Updates',1,NOW(),2);
+
+-- Sub Groups (10)
+INSERT INTO Sub_Groups VALUES
+(1,'Movie Reviews',1,'Movies',1,NOW(),1),
+(2,'Netflix Series',1,'Series',1,NOW(),2),
+(3,'React',2,'React JS',1,NOW(),3),
+(4,'Android',2,'Android Dev',1,NOW(),3),
+(5,'Novels',3,'Novels',1,NOW(),2),
+(6,'Painting',4,'Painting',1,NOW(),6),
+(7,'Yoga',5,'Yoga',1,NOW(),5),
+(8,'Domestic Travel',6,'India Travel',1,NOW(),9),
+(9,'Automation',9,'Automation QA',1,NOW(),4),
+(10,'Recruitment',10,'Hiring',1,NOW(),2);
+
+-- Group Posts (10)
+INSERT INTO Group_Posts VALUES
+(1,3,'React Hooks','Content > 200 chars',2,3,NULL,NULL,'react.dev',15,NOW()),
+(2,4,'Android Tips','Useful android tips',2,4,NULL,NULL,'android.com',10,NOW()),
+(3,1,'Movie Review','Great movie',1,1,NULL,NULL,'IMDB',25,NOW()),
+(4,2,'Netflix Suggestion','Must watch',1,2,NULL,NULL,'Netflix',18,NOW()),
+(5,5,'Fitness Tips','Healthy life',5,7,NULL,NULL,'health.com',12,NOW()),
+(6,6,'Painting Art','Creative painting',4,6,NULL,NULL,'art.com',5,NOW()),
+(7,7,'Travel Blog','Amazing trip',6,8,NULL,NULL,'travel.com',20,NOW()),
+(8,8,'Book Review','Nice book',3,5,NULL,NULL,'books.com',7,NOW()),
+(9,9,'Automation Tools','Selenium tips',9,9,NULL,NULL,'selenium.dev',14,NOW()),
+(10,10,'HR Policy','Company HR policy',10,10,NULL,NULL,'company.com',9,NOW());
+
+/* ================================
+   QUERIES
+================================ */
+
+-- All Cities
+SELECT * FROM City;
+
+-- All Roles
+SELECT * FROM Roles;
+
+-- All Users
+SELECT * FROM Users;
+
+-- All Groups
+SELECT * FROM Groups;
+
+-- Users with Role & City
+SELECT CONCAT(u.first_name,' ',u.last_name) AS Name,
+       r.name AS Role, u.email_id, u.phone_number, u.birth_date, c.name AS City
+FROM Users u
+JOIN Roles r ON u.role_id=r.role_id
+JOIN City c ON u.city_id=c.city_id;
+
+-- Sub Groups group-wise
+SELECT g.name AS GroupName, sg.name AS SubGroup
+FROM Sub_Groups sg
+JOIN Groups g ON sg.group_id=g.group_id;
+
+-- Birthday today
+SELECT * FROM Users
+WHERE DAY(birth_date)=DAY(CURDATE())
+AND MONTH(birth_date)=MONTH(CURDATE());
+
+-- Posts last 2 days
+SELECT * FROM Group_Posts
+WHERE created_date >= DATE_SUB(NOW(),INTERVAL 2 DAY)
+ORDER BY created_date DESC;
+
+-- Posts by first joined employee
+SELECT * FROM Group_Posts
+WHERE posted_by = (
+  SELECT user_id FROM Users ORDER BY joining_date ASC LIMIT 1
+);
+
+-- City-wise user count
+SELECT c.name, COUNT(*) total_users
+FROM Users u JOIN City c ON u.city_id=c.city_id
+GROUP BY c.name ORDER BY total_users DESC;
+
+-- Users never posted
+SELECT * FROM Users
+WHERE user_id NOT IN (SELECT posted_by FROM Group_Posts);
+
+-- Top 5 liked posts
+SELECT title, like_count FROM Group_Posts
+ORDER BY like_count DESC LIMIT 5;
+
+
+
+
+
+
